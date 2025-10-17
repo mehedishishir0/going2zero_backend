@@ -1,0 +1,882 @@
+{
+  "info": {
+    "_postman_id": "combined-collection-id",
+    "name": "Rokasmacys API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "User Registration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n    \"fullName\": \"John Doe\", \n    \"phoneNumber\": \"1234567890\", \n    \"email\": \"moni@example.com\",\n     \"password\": \"password123\", \n    \"companyLegalName\": \"Example Corp\" \n }"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/user/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "user", "register"]
+            }
+          }
+        },
+        {
+          "name": "User Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n    \"email\": \"moni@example.com\",\n     \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/user/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "user", "login"]
+            }
+          }
+        },
+
+        {
+          "name": "Update Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{      \"email\": \"moni@example.com\",      \"oldPassword\": \"password123\" ,      \"newPassword\":\"123password\"  }"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/user/update-password",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "user", "update-password"]
+            }
+          }
+        },
+
+        {
+          "name": "Forget Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n    \"email\": \"john@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/user/forget-password",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "user", "forget-password"]
+            }
+          }
+        },
+        {
+          "name": "Verify Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"email\": \"john@example.com\", \"verificationCode\": \"123456\" }"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/user/verify-code",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "user", "verify-code"]
+            }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"email\": \"john@example.com\", \"password\": \"newpassword123\" }"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/user/reset-password",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "user", "reset-password"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/user/profiles",
+              "host": ["{{base_url}}"],
+              "path": ["api", "user", "profiles"]
+            }
+          }
+        },
+        {
+          "name": "Get Single User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/user/profile/{{user_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "user", "profile", "{{user_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "fullName",
+                  "value": "Updated Name",
+                  "type": "text"
+                },
+                {
+                  "key": "phoneNumber",
+                  "value": "9876543210",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "updated@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "newpassword123",
+                  "type": "text"
+                },
+                {
+                  "key": "profileImage",
+                  "type": "file",
+                  "src": "/path/to/profile/image.jpg"
+                },
+                {
+                  "key": "address",
+                  "type": "text",
+                  "value": "ghatail tangail"
+                },
+                {
+                  "key": "about",
+                  "type": "text",
+                  "value": "i bad"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/user/profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "user", "profile"]
+            }
+          }
+        }
+      ]
+      },
+      
+        {
+      "name": "Company",
+      "item": [
+        {
+          "name": "Create Company",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n\"businessName\": \"Tech Solutions\",\n\"identificationNumber\": \"123456789\", \n\"businessLicenseNumber\": \"987654\",\n\"businessAddress\": \"123 Tech Street\",\n\"businessEntity\": \"LLC\",\n\"businessDuration\": \"5 years\",\n\"industryType\": \"IT\", \n\"employeeNumber\": 50, \n\"primaryProducts\": [\"Software\", \"Consulting\"],\n\"annualRevenue\": 1000000,\n\"userId\": \"67de4df2205fefc8fed7885e\" \n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/company/create",
+              "host": ["{{base_url}}"],
+              "path": ["api", "company", "create"]
+            }
+          }
+        },
+        
+        {
+          "name": "Get All Companies",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/company",
+              "host": ["{{base_url}}"],
+              "path": ["api", "company"]
+            }
+          }
+        },
+        {
+          "name": "Get Company by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/company/{{company_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "company", "{{company_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Company",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"businessName\": \"Updated Tech Solutions\" }"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/company/{{company_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "company", "{{company_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Company",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/company/{{company_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "company", "{{company_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blog",
+      "item": [
+        {
+          "name": "Create Blog",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "{{title}}"
+                },
+                {
+                  "key": "description",
+                  "value": "{{description}}"
+                },
+                {
+                  "key": "tag",
+                  "value": "{{tagId}}"
+                },
+                {
+                  "key": "authorName",
+                  "value": "{{authorName}}"
+                },
+                {
+                  "key": "referenceUrl",
+                  "value": "{{referenceUrl}}"
+                },
+                {
+                  "key": "date",
+                  "value": "{{date}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/blogs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs"]
+            }
+          }
+        },
+        {
+          "name": "Get All Blogs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/blogs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs"]
+            }
+          }
+        },
+        {
+          "name": "Get Single Blog",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/blogs/:slug",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs", ":slug"]
+            }
+          }
+        },
+        {
+          "name": "Update Blog",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"title\": \"Updated Blog\", \"description\": \"Updated description\" }"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/blogs/:slug",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs", ":slug"]
+            }
+          }
+        },
+        {
+          "name": "Delete Blog",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/blogs/:slug",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs", ":slug"]
+            }
+          }
+        },
+        {
+          "name": "Publish Blog",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/blogs/:slug",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs", ":slug"]
+            }
+          }
+        },
+        {
+          "name": "Unpublish Blog",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/blogs/unpublish/:slug",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs", "unpublish", ":slug"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Create Payment Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 400,\n  \"paymentType\": \"entry_fee\",\n  \"email\": \"enter user email\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payment/checkout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "payment", "checkout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Newsletter",
+      "item": [
+        {
+          "name": "Join Newsletter",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/newsletter",
+              "host": ["{{base_url}}"],
+              "path": ["api", "newsletter"]
+            }
+          }
+        },
+        {
+          "name": "Get All Newsletter Subscribers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/newsletter",
+              "host": ["{{base_url}}"],
+              "path": ["api", "newsletter"]
+            }
+          }
+        },
+        {
+          "name": "Send Newsletter to All",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sub\": \"This Week's Update!\",\n  \"body\": \"Here's what's new on the platform this week...\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/newsletter/send",
+              "host": ["{{base_url}}"],
+              "path": ["api", "newsletter", "send"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "item": [
+        {
+          "name": "Send Contact Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"subject\": \"Feedback\",\n  \"message\": \"Love the platform!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/contact",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contact"]
+            }
+          }
+        },
+        {
+          "name": "Get All Contacts",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/contact",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contact"]
+            }
+          }
+        },
+        {
+          "name": "Get Contact By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/contact/{{contactId}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contact", "{{contactId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Contact",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/contact/{{contactId}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contact", "{{contactId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tags",
+      "item": [
+        {
+          "name": "Create Category",
+          "request": {
+          "method": "POST",
+          "header": [
+            { "key": "Content-Type", "value": "application/json" },
+            { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"New Category\"\n}"
+          },
+          "url": {
+            "raw": "{{base_url}}/api/tags",
+            "host": ["{{base_url}}"],
+            "path": ["api", "tags"]
+          }
+          }
+        },
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/tags",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tags"]
+            }
+          }
+        },
+        {
+          "name": "Get Category by Slug",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/tags/{{slug}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tags", "{{slug}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Design Tools\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tags/{{slug}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tags", "{{slug}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/tags/{{slug}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tags", "{{slug}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Emissions",
+      "item": [
+        {
+          "name": "Create Emissions Record",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "basic_information.full_name", "value": "John Doe", "type": "text" },
+                { "key": "basic_information.email", "value": "john@example.com", "type": "text" },
+                { "key": "basic_information.phone_number", "value": "1234567890", "type": "text" },
+                { "key": "basic_information.company_legal_name", "value": "John Corp Ltd", "type": "text" },
+                { "key": "basic_information.company_operating_name", "value": "JohnCorp", "type": "text" },
+                { "key": "basic_information.website", "value": "https://johncorp.com", "type": "text" },
+                { "key": "basic_information.headquarter_location", "value": "New York", "type": "text" },
+                { "key": "basic_information.type_of_organization", "value": "Private Limited Company (Ltd)", "type": "text" },
+    
+                { "key": "basic_information.business_sector[0].sector", "value": "Manufacturing", "type": "text" },
+                { "key": "basic_information.business_sector[0].carbon_emission_percentage", "value": "75", "type": "text" },
+    
+                { "key": "basic_information.number_of_employees", "value": "150", "type": "text" },
+                { "key": "basic_information.business_description", "value": "Manufacturing eco-friendly materials", "type": "text" },
+    
+                { "key": "carbon_footprint.total_electrical_consumption_kwh", "value": "50000", "type": "text" },
+    
+                { "key": "carbon_footprint.energy_sources[0].source", "value": "Solar", "type": "text" },
+                { "key": "carbon_footprint.energy_sources[0].usage_percentage", "value": "60", "type": "text" },
+    
+                { "key": "carbon_footprint.percentage_of_energy_renewable", "value": "60", "type": "text" },
+                { "key": "carbon_footprint.number_of_company_owned_vehicles", "value": "10", "type": "text" },
+    
+                { "key": "carbon_footprint.type_of_fuel_used_in_vehicles[0].fuel_type", "value": "Electric", "type": "text" },
+                { "key": "carbon_footprint.type_of_fuel_used_in_vehicles[0].usage_percentage", "value": "100", "type": "text" },
+    
+                { "key": "carbon_footprint.average_distance_travelled_per_vehicle_annually.distance", "value": "10000", "type": "text" },
+                { "key": "carbon_footprint.average_distance_travelled_per_vehicle_annually.unit", "value": "Miles", "type": "text" },
+    
+                { "key": "carbon_footprint.annual_business_flight_distance.distance", "value": "15000", "type": "text" },
+                { "key": "carbon_footprint.annual_business_flight_distance.unit", "value": "Miles", "type": "text" },
+    
+                { "key": "carbon_footprint.annual_business_train_distance.distance", "value": "5000", "type": "text" },
+                { "key": "carbon_footprint.annual_business_train_distance.unit", "value": "Miles", "type": "text" },
+    
+                { "key": "supply_chain_logistics.volume_of_goods_transportation_tons", "value": "250", "type": "text" },
+                { "key": "supply_chain_logistics.primary_transportation_method", "value": "Truck", "type": "text" },
+    
+                { "key": "finances.total_annual_turnover", "value": "5000000", "type": "text" },
+                { "key": "finances.total_value_of_assets", "value": "2000000", "type": "text" },
+                { "key": "finances.description", "value": "Stable financial growth over 5 years", "type": "text" },
+    
+                { "key": "finances.financial_statements", "type": "file", "src": "path/to/file1.pdf" }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/emissions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emissions"]
+            }
+          }
+        },
+        {
+          "name": "Get All Emissions",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/emissions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emissions"]
+            }
+          }
+        },
+        {
+          "name": "Get Emissions by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/emissions/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emissions", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Update Emissions",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "finances.financial_statements", "type": "file", "src": "path/to/updated_file.pdf" }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/emissions/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emissions", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Delete Emissions",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/emissions/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "emissions", ":id"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Consultation",
+      "item": [
+        {
+          "name": "Book Consultation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone_number\": \"9876543210\",\n  \"business_nature\": \"Tech Solutions\",\n  \"biggest_challenge\": \"I don't know what to do\",\n  \"best_time_to_call\": \"anytime\",\n \"bookingType\": \"paid\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/consultation/booking",
+              "host": ["{{base_url}}"],
+              "path": ["api", "consultation", "booking"]
+            }
+          }
+        }
+      ]
+    }
+    
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "auth_token",
+      "value": "replace_with_auth_token"
+    },
+    {
+      "key": "company_id",
+      "value": "replace_with_company_id"
+    },
+    {
+      "key": "contactId",
+      "value": "replace_with_contact_id"
+    },
+    {
+      "key": "slug",
+      "value": "replace_with_slug"
+    }
+  ]
+}
